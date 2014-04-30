@@ -1,0 +1,71 @@
+<!--[if IE]>-->
+*{
+	behavior: url(../css/ie-css3.htc);
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%; 
+	margin: 0px; 
+	padding: 0px;
+	cursor: url(../imagenes/favicon/mario.cur), default;
+	background: #A1EF65;
+	font-family: Arial, sans-serif, "Verdana";
+}
+
+#mi_mapa {
+	width:100%;
+	height:86%;
+	top: 92px;
+	left: 0px;
+	position:fixed;
+}
+
+header {
+	height:60px;
+	position: fixed;
+	left: 0px;
+	right: 0px;
+    background: #A1EF65 url(../imagenes/images/barra_verde.png) repeat-x center left;
+    background-size: 2px;
+}
+
+header img.logo_header {
+	width:180px;
+    height:50px;
+    position: relative;
+    top: 3px;
+    left: 30px;
+    cursor: url(../imagenes/favicon/hand.cur), pointer;
+    border: 0px;
+}
+
+header img.logo_mapa{
+	width:380px;
+    height:50px;
+    position: relative;
+    top: 3px;
+    left: 610px;
+    cursor: url(../imagenes/favicon/hand.cur), pointer;
+    border: 0px;
+}
+
+input[type=checkbox]{
+	height: auto;
+	width: auto;
+	/*cursor: url(../imagenes/favicon/hand.cur), pointer;*/
+	cursor: url(../imagenes/favicon/mario.cur), pointer;
+}
+
+.searchbox{
+	padding: 0px 8px;
+	border: 0px;
+}
+
+td {
+	font-size: 14px;
+	font-family: Arial, sans-serif, "Verdana";
+}

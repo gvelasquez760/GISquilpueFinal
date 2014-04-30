@@ -1,0 +1,42 @@
+ #acc
+,#acc h3
+,#nested
+,#nested h3
+,ul.legendLists {margin:0px; padding:0px;}
+
+#acc {width:254px; list-style:none; color:#f1f1f2; margin:0 0 0 10px; padding:0 10px; background: #333;}
+#acc h3 {width:254px; padding:3px 0 3px 3px; background: #333 url(../imagenes/images/dragIcon.png) 240px 5px no-repeat; font: 14px "Trebuchet MS", Verdana, sans-serif; }
+#acc .acc-section {overflow:hidden;}
+#acc .acc-content {width:254px; padding:0px; }
+#acc .acc-selected {background: #333 url(../imagenes/images/dragIcon.png) 240px 5px no-repeat;}
+
+#nested {width:254px; list-style:none; color:#FFF; font-size:.8em; margin:0 0 10px 0;}
+#nested h3 { border-top: 1px double #666; width:254px; padding:1px 1px 1px 3px; cursor: url(../imagenes/favicon/mario.cur), pointer; background:#71C734 url(../imagenes/images/flecha_izquierda.png) 230px 0px no-repeat; font: 13px "Trebuchet MS", Verdana, sans-serif;}
+#nested .acc-section {overflow:hidden; background:#414141;}
+#nested .acc-content { width:240px; padding:1px 10px; background:#414141; font-size:.9em;}
+#nested .acc-selected {background: #71C734 url(../imagenes/images/flecha_abajo.png) 230px 0px no-repeat;}
+
+#nested h3:hover {background: red url(../imagenes/images/flecha_abajo.png) 230px 0px no-repeat; }
+
+ul.legendLists li { 
+	padding: 1px 0 1px 25px; 
+	border-bottom: 1px dotted #eee; 
+	list-style-type:none; 
+	font: 12px "Trebuchet MS", Verdana, sans-serif;
+}
+
+ul.legendLists a:link,
+ul.legendLists a:visited 	{ text-decoration: none; color: white;}
+ul.legendLists a:hover 		{ color: #69C325;}
+
+li.legendListIcon_bomberos 					{background: url(../imagenes/marker/marker_15/bomberos_15mm.png) no-repeat;}
+li.legendListIcon_carabineros 				{background: url(../imagenes/marker/marker_15/carabineros_15mm.png) no-repeat;}
+li.legendListIcon_policiainvestigaciones 	{background: url(../imagenes/marker/marker_15/policia_15mm.png) no-repeat;}
+li.legendListIcon_educacion 				{background: url(../imagenes/marker/marker_15/educacion_15mm.png) no-repeat;}
+li.legendListIcon_jardines 					{background: url(../imagenes/marker/marker_15/jardines_15mm.png) no-repeat;}
+li.legendListIcon_salud 					{background: url(../imagenes/marker/marker_15/salud_15mm.png) no-repeat;}
+li.legendListIcon_corporacion 				{background: url(../imagenes/marker/marker_15/corporacion_15mm.png) no-repeat;}
+li.legendListIcon_municipalidad 			{background: url(../imagenes/marker/marker_15/municipalidad_15mm.png) no-repeat;}
+li.legendListIcon_rutas 					{background: url(../imagenes/marker/marker_15/rutas_15mm.png) no-repeat;}
+
+#draggable { position:absolute; top:115px; left:30px;}

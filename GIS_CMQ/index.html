@@ -1,0 +1,469 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="es" >
+<head>
+	
+	
+<!--____________________ Metas ______________________-->
+<!--Soporte para caracteres utf-8 Acentos-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="description" content="Mapa Interactivo para la Corporacion Municipal de Quilpu&eacute;">
+
+<!--____________________ Titulo ______________________-->
+<title>Mapa Interactivo | Quilpué</title>
+
+
+<!--__________________ JavaScripts ____________________-->
+<!-- Google Maps API v3 con librerias de lugares,clima,idioma -->
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3&amp;sensor=false&amp;language=es&amp;libraries=places,weather" ></script>
+<!-- Complemento JQuery v1.8.1-->
+<script type="text/javascript" src="js/complementos/jquery-1.8.1.js"></script>				<!-- No Borrar -->
+<!-- Configuración y Funcionalidad de nuestro mapa-->
+<script type="text/javascript" src="js/map-config.js" ></script>							<!-- No Borrar -->
+
+
+<!-- JavaScript: Acerca de... -->
+<script type="text/javascript" src="js/acerca_de.js"></script>
+
+
+<!-- JavaScript: Maximizar -->
+<script type="text/javascript" src="js/maximizar.js"></script>
+
+
+<!-- JavaScript: Ayuda -->
+<script type="text/javascript" src="js/ayuda/ayuda.js"></script>							<!-- No Borrar -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>	<!-- No Borrar -->
+
+
+<!-- JavaScript: Panel Lateral Derecho-->
+<script type="text/javascript" src="js/panel/jquery-ui.min.js"></script>
+<script type="text/javascript" id="sourcecode">
+	$(function() {		
+		$("#draggable").draggable();
+	});	
+</script>
+
+
+<!-- JavaScript: Login -->
+<!-- Funcionalidad para encriptar un valor (codigo HASH: MD5)-->
+<script type="text/javascript" src="js/login/md5.js"></script>
+<script type="text/javascript" src="js/login/login.js"></script>
+
+
+<!-- JavaScript: Bienvenida -->
+<script type="text/javascript" src="js/bienvenida.js"></script>
+
+<!--___________________ CSS ___________________-->
+<link rel="stylesheet" 		href="css/general.css" 	 	type="text/css" />
+<link rel="stylesheet" 		href="css/nav_menu.css"  	type="text/css" />
+<link rel="stylesheet" 		href="css/acerca_de.css" 	type="text/css" />
+<link rel="stylesheet"  	href="css/ayuda.css" 	 	type="text/css" />
+<link rel="stylesheet"      href="css/panel.css" 	 	type="text/css" />
+<link rel="stylesheet"      href="css/login.css" 	 	type="text/css" />
+<link rel="stylesheet"      href="css/formulario.css" 	type="text/css" />
+<link rel="stylesheet" 		href="css/infowindows.css"  type="text/css" />
+<link rel="stylesheet" 		href="css/bienvenido.css" 	type="text/css" />
+
+<!-- Favicon -->
+<link rel="shortcut icon" 	href="imagenes/favicon/favicon.ico" />
+
+</head>
+<!-- ===================================================================================== -->
+<!-- Carga inicial al cargar la pagina, en este caso, la ventana de bienvenida y la inicialización del mapa -->
+<body onload=" bienvenida(); initialize(); ">
+	
+	<!-- Encabezado -->
+    <header id="encabezado">
+		<a href="http://www.quilpue.cl/" target="_blank">
+			<img class="logo_header" src="imagenes/images/quilpue-logo.png" alt="-"/>
+		</a>
+		<a href="">
+			<img class="logo_mapa" src="imagenes/images/mapainteractivo.png" alt="-"/>
+		</a>
+    </header>
+    <!-- FIN Encabezado -->
+    
+    <!-- Funcionalidad del boton buscar-->    
+    <script type="text/javascript" src="js/boton_buscar.js"></script>
+    
+    <!-- Barra Menu -->
+    <nav id="barra_menu">
+    	<!-- Buscador -->
+		<ul class="buscador">
+			<li class="search">
+				<p class="label_search">Busqueda</p>
+				<input type="text" id="searchbox" class="searchbox" size="45" title="Escriba aquí lo que desea buscar" 
+					   placeholder="¿Qué calle o dirección desea buscar?"  onfocus="KeyEvent(this,'AnyFunction()');" />
+				<input class="searchbutton" type="button" title="Buscar ahora!" value="" />
+			</li>
+		</ul>
+		
+		<!-- Botones -->
+		<ul class="menu">
+			<li><a class="inicio" 	 title="Inicio" 		href="" ></a></li>
+			<li><a class="ubicacion" title="Mi Ubicación" 	href="#mi_ubicacion" onclick="mi_ubicacion()" ></a></li>
+			<li><a class="maximize"  title="Maximizar/Minimizar"></a></li>
+			<!--<li><a class="imprimir"  title="Imprimir"       href="#imprimir"  onclick="window.open('imprimir.html')" ></a></li>-->
+			<li><a class="ayuda"     title="Ayuda"></a></li>
+			<li><a class="acerca"    title="Acerca de Mapa Interactivo" id="acerca_de" href="#acerca_de" ></a></li>
+			<li><a class="volver"    title="Volver a CMQ" href="http://www.cmq.cl/" target="_blank"></a></li>
+			<li><a class="login" 	 title="Login Administrativo" href="#login-box"></a></li>
+		</ul>
+	</nav>
+	
+	<!-- Mapita -->
+	<div id="mi_mapa"></div>
+	
+	<!-- panel lateral-->
+	<div id="draggable" class="ui-widget-content">
+		<ul class="acc" id="acc">
+			<li>
+				<h3 class="legendHead"><b>Navegador</b></h3>
+				<div class="acc-section">
+					<div class="acc-content">
+						<ul class="acc" id="nested">
+							<li>
+								<h3 class="nestedH1">
+									<input type="checkbox" id="educacion" onclick="boxclick(this,'educacion')" />
+									Educación
+								</h3>
+								<div class="acc-section">
+									<div class="acc-content">
+										<ul class="legendLists">
+											<div id="sidebar_educacion" style="top:5px; left: 10px; width:280px; height:398px;"> </div>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h3 class="nestedH2">
+									<input type="checkbox" id="jardines" onclick="boxclick(this,'jardines')" />
+									Jardines Infantiles
+								</h3>
+								<div class="acc-section">
+									<div class="acc-content">
+										<ul class="legendLists">
+											<div id="sidebar_jardines" style="top:5px; left: 10px; width:280px; height:167px;"> </div>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h3 class="nestedH3">
+									<input type="checkbox" id="salud" onclick="boxclick(this,'salud')" />
+									Salud
+								</h3>
+								<div class="acc-section">
+									<div class="acc-content">
+										<ul class="legendLists">
+											<div id="sidebar_salud" style="top:5px; left: 10px; width:280px; height:146px;"> </div>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h3 class="nestedH4">
+									<input type="checkbox" id="bomberos" onclick="boxclick(this,'bomberos')" />
+									Bomberos
+								</h3>
+								<div class="acc-section">
+									<div class="acc-content">
+										<ul class="legendLists">
+											<div id="sidebar_bomberos" style="top:5px; left: 10px; width:280px; height:104px;"> </div>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h3 class="nestedH5">
+									<input type="checkbox" id="carabineros" onclick="boxclick(this,'carabineros')" />
+									Carabineros
+								</h3>
+								<div class="acc-section">
+									<div class="acc-content">
+										<ul class="legendLists">
+											<div id="sidebar_carabineros" style="top:5px; left: 10px; width:280px; height:41px;"> </div>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h3 class="nestedH6">
+									<input type="checkbox" id="policiainvestigaciones" onclick="boxclick(this,'policiainvestigaciones')" />
+									Policia de Investigaciones
+								</h3>
+								<div class="acc-section">
+									<div class="acc-content">
+										<ul class="legendLists">
+											<div id="sidebar_policia" style="top:5px; left: 10px; width:280px; height: 20px;"> </div>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h3 class="nestedH7">
+									<input type="checkbox" id="municipalidad" onclick="boxclick(this,'municipalidad')" />
+									Municipalidad
+								</h3>
+								<div class="acc-section">
+									<div class="acc-content">
+										<ul class="legendLists">
+											<div id="sidebar_municipalidad" style="top:5px; left: 10px; width:280px; height:20px;"> </div>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h3 class="nestedH8">
+									<input type="checkbox" id="corporacion" onclick="boxclick(this,'corporacion')" />
+									Corporación Municipal
+								</h3>
+								<div class="acc-section">
+									<div class="acc-content">
+										<ul class="legendLists">
+											<div id="sidebar_corporacion" style="top:5px; left: 10px; width:280px; height:20px;"> </div>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li>
+							<hr style="border: none; margin: 2px; " />
+								<h3 class="nestedH9">
+									<input type="checkbox" id="ruta1" />
+									Ruta Bus 1
+								</h3>
+								<div class="acc-section">
+									<!--<div class="acc-content">
+										<ul class="legendLists">
+											<li class="legendListIcon-4">High-Level of Service</li>
+											<li class="legendListIcon-5">Medium-Level of Service</li>
+										</ul>
+									</div>-->
+								</div>
+							</li>
+							<li>
+								<h3 class="nestedH10">
+									<input type="checkbox" id="ruta2" />
+									Ruta Bus 2
+								</h3>
+								<div class="acc-section"></div>
+							</li>
+							<li>
+								<h3 class="nestedH11">
+									<input type="checkbox" id="ruta3" />
+									Ruta Bus 3
+								</h3>
+								<div class="acc-section"></div>
+							</li>
+							<li>
+								<h3 class="nestedH12">
+									<input type="checkbox" id="ruta4" />
+									Ruta Bus 4
+								</h3>
+								<div class="acc-section"></div>
+							</li>
+							<li>
+							<hr style="border: none; margin: 2px; " />
+								<h3 class="nestedH13">
+									<input type="checkbox" id="tiempo" />
+									Estado del Tiempo
+								</h3>
+								<div class="acc-section"></div>
+							</li>
+							<li>
+								<h3 class="nestedH14">
+									<input type="checkbox" id="meteorologia" />
+									Meteorología
+								</h3>
+								<div class="acc-section"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- Acerca de.. -->
+	<div class="overlay" id="overlay" style="display:none;"></div>
+        <div class="box" id="box">
+            <a class="boxclose" id="boxclose"></a>
+            <h1>Acerca de Mapa Interactivo</h1>
+            
+            <table style="margin-top: 10px" border="0">
+				<tr><!-- 1era fila -->
+					<td><!-- 1era Columna -->
+						<div id="mini_imagenes">            
+	            			<a href="http://www.mozilla.org/es-CL/firefox/new/" title="Descarga Mozilla Firefox">
+	            				<img class="navegadores" src="imagenes/icon/browsers/firefox.png" border="0" alt="-" />
+	            			</a>
+	            			<a href="https://www.google.com/chrome?hl=es" title="Descarga Google Chrome" >
+	            				<img class="navegadores" src="imagenes/icon/browsers/chrome.png" border="0" alt="-" />
+	            			</a>
+	            			<a href="http://www.opera.com/download/" title="Descarga Opera">
+	            				<img class="navegadores" src="imagenes/icon/browsers/opera.png" border="0" alt="-" />
+	            			</a>
+		       			</div>
+		       		</td>
+		       		<td><!-- 2da Columa -->
+		       			<p class="mini_texto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sitio optimizado para estos navegadores web.</p>
+		       		</td>
+				</tr>
+            </table>
+	        <hr style="color: #9DEA61">
+	        <table border="0">
+	        	<tr><!-- 1era fila -->
+	        		<td width="160"><!-- 1era columna -->
+	        			<div id="mini_imagenes"> 
+	        				<center><img src="imagenes/icon/browsers/Monitor.png" height="64" width="64" alt="-"/></center>
+	        			</div>
+	        		</td>
+	        		<td>
+	        			<p class="mini_texto"> &nbsp;&nbsp;&nbsp; Resolución de pantallas superiores a 1024x768</p>
+	        		</td>
+	        	</tr>
+	        </table>
+	        <hr style="color: #9DEA61">
+	        <table border="0">
+	        	<tr>
+	        		<td width="160">
+	        			<div id="mini_imagenes"> 
+	        				<center><img src="imagenes/icon/browsers/User.png" height="64" width="64" alt="-"/></center>
+	        			</div>
+	        		</td>
+	        		<td>
+	        			<p class="mini_texto"> &nbsp;&nbsp;&nbsp; Nuestro correo es:<br />&nbsp;&nbsp;&nbsp; <a href="mailto: soluciones.mundo.gis@gmail.com">soluciones.mundo.gis@gmail.com</a></p>
+	        		</td>
+	        	</tr>
+	        </table>
+    	</div>
+    	
+    	<!-- Bienvenida.. -->
+	<div class="wellcome" id="wellcome" style="display:none;"></div>
+        <div class="box3" id="box3">
+            <a class="boxclose3" id="boxclose3"></a>
+            <h1>Bienvenido al Mapa Interactivo</h1>
+            
+            <center><table style="margin-top: 10px" border="0">
+            	<p style='font-family: Arial, sans-serif, "Verdana"; font-size: 14px; text-align: justify; '>
+            		El Nuevo Mapa Interactivo de la Ciudad de Quilpué, es un lugar creado con la intención de ayudar a la comunidad a conocer un poco más de su ciudad, mostrando información como por ejemplo: Educación, Salud, Jardines Infantiles, etc.
+            	</p>
+            	<p style='font-family: Arial, sans-serif, "Verdana"; font-size: 14px; text-align: justify; '>
+            		<center><img src="imagenes/icon_streetview.gif" alt="-"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ahora se encuentra disponible lo nuevo de Google Street View</center>
+            	</p>
+            	<tr>
+            		<td><img src="imagenes/map_icon.png" alt="-"/></td>
+            		<td><p style='font-family: Arial, sans-serif, "Verdana"; font-size: 14px; text-align: justify; '>Si Ud. es nuevo o necesita de nuestra ayuda<br><br>Haga click en el Icono de Ayuda<br><br><center><a id="ayuda2" title="Ayuda" ><img src="imagenes/ayuda_mundo.png" alt="-" /></a></center></p></td>
+            	</tr>
+            </table></center> 
+            
+        </div>
+	
+        <!-- Fomulario Login -->
+        <div class="formulary" id="formulary" style="display:none;"></div>
+        <div class="box2" id="box2">
+            <a class="boxclose2" id="boxclose2"></a>
+			<form action="js/marcadores/registrar.php" method="post">
+            <h1>Formulario: Insertar Nuevo Marcador</h1>
+            
+            <table style="margin-top: 10px" border="0">
+            	<tr>
+            		<td align="right">Nombre</td>
+            		<td><input type="text" name="name" size="33"/></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'><b style="color: red;">*</b> Ej: Jardin Mis Trencitos</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Telefono</td>
+            		<td><input type="text" name="fono" size="33"/></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'>&nbsp;&nbsp;Ej: (032)2345678 - (09)12345678</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Dirección</td>
+            		<td><input type="text" name="direccion" size="33"/></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'><b style="color: red;">*</b> Ej: Freire #123, Quilpué</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Correo</td>
+            		<td><input type="text" name="mail" size="33"/></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'>&nbsp;&nbsp;Ej: ejemplo@quilpue.cl</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Información</td>
+            		<td><textarea style='font: 13px Arial, sans-serif, "Verdana";' name="info" cols=29 rows=2></textarea></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'><b style="color: red;">*</b> Máx. 3 lineas</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Sitio Web</td>
+            		<td><input type="text" name="web" size="33"/></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'>&nbsp;&nbsp;Ej: http://www.ejemplo.cl</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Logo</td>
+            		<td><input type="text" name="logo" size="33"/></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'>&nbsp;&nbsp;Ej: imagenes/logos/EJEMPLO.png</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Latitud</td>
+            		<td><input type="text" name="lat" size="33"/></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'><b style="color: red;">*</b> Ej: -33.044357</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Longitud</td>
+            		<td><input type="text" name="lng" size="33"/></td>
+            		<td align="left"><p style='font: 11px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 10%;'><b style="color: red;">*</b> Ej: -71.430588</p></td>
+            	</tr>
+            	<tr>
+            		<td align="right">Categoria</td>
+            		<td>
+            			<select name="category" >
+							<option value="educacion"  selected>Educación</option>
+							<option value="jardines">Jardines Infantiles</option>
+							<option value="salud">Salud</option>
+							<option value="bomberos">Bomberos</option>
+							<option value="carabineros">Carabineros</option>
+							<option value="policiainvestigaciones">Policia de Investigaciones</option>
+						</select>
+            		</td>
+            		<td align="left"></td>
+            	</tr>
+            	<tr>
+            		<td></td>
+            		<td><center><button class="submit button" type="submit" value="Registrar">Insertar</button></center></td>
+					<td align="left"><p style='font: 10px Arial, sans-serif, "Verdana"; color: #71C734; line-height: 110%;'><b style="color: red;">* Estos campos deben ser <u>OBLIGARIOS</u>.<br/><br/>&nbsp;&nbsp;Los campos no obligatorios <u>DEBEN</u> ser llenados con un guion (-) al no contar con información.</b></p></td>
+            	</tr>
+            </table>	
+			</form>
+        </div>
+        
+		<!-- JavaScript: Panel -->
+		<script type="text/javascript" src="js/panel/function_panel.js"></script>
+		<script type="text/javascript" src="js/panel/panel.js"></script>
+                
+		<!-- Login -->
+		<div id="login-box" class="login-popup">
+        	<a href="#" class="close"></a>
+        	<h3>Login Administrativo</h3>
+			<form method="post" class="signin" action="#">
+				<fieldset class="textbox">
+					<form>
+					<label class="username">
+						<span>Usuario</span>
+						<input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Usuario">
+	                </label>
+	                <label class="password">
+						<span>Contraseña</span>
+						<input id="password" name="password" value="" type="password" placeholder="Contraseña">
+	                </label>
+	                <button class="submit button" type="button" onclick="convierteMd5(this.form)">Ingresar</button>
+	                </form>        
+	            </fieldset>
+	        </form>
+		</div>
+		
+
+	<!--<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>-->
+
+</body>
+</html>

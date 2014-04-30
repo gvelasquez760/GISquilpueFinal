@@ -1,0 +1,158 @@
+nav{
+    height:35px;
+    border-bottom:0px solid #ddd;
+    position:fixed;
+    top:57px;
+    left:0px;
+    right:0px;
+    background: #FFF url(../imagenes/images/barra_gris.png) repeat-x center left;
+    background-size: 2px;
+}
+
+nav ul.buscador{
+    height:25px;
+    list-style:none;
+    font-family: Arial, sans-serif, "Verdana";
+    margin:6px auto 6px auto;
+    float: left;
+	width: 780px;				/* <-- modificar en caso de agregar nuevo menu */
+	/*background-color: green;*/
+}
+
+nav ul li{
+    display:inline;
+}
+
+nav ul.menu{
+	height:25px;
+	list-style:none;
+	font-family: Arial, sans-serif, "Verdana";
+    margin:6px auto 6px auto;
+    float: left;
+    width:270px;
+	/*background-color: red;*/
+}
+
+nav a{
+    font-size:11px;
+    font-weight:bold;
+    float:left;
+    padding: 2px 4px;
+    color:#999;
+    text-decoration: none;
+	cursor: url(../imagenes/favicon/hand.cur), pointer;
+    background: transparent url(../imagenes/images/overlay.png) repeat-x center left;
+    height:16px;
+    line-height:16px;
+    margin:0px 2px;
+    -moz-box-shadow: 0px 0px 20px  #71C734;
+	box-shadow: 0px 0px 20px #71C734;
+}
+
+nav a:hover{
+    background: #69C325 none;
+    color: white;
+}
+
+nav a.inicio{	background: transparent url(../imagenes/icon/home.png) no-repeat center center;}
+nav a.ubicacion{background: transparent url(../imagenes/icon/world.png) no-repeat center center;}
+nav a.maximize{	background: transparent url(../imagenes/icon/maximize.png) no-repeat center center;}
+nav a.imprimir{	background: transparent url(../imagenes/icon/imprimir.png) no-repeat center center;}
+nav a.ayuda{	background: transparent url(../imagenes/icon/question.png) no-repeat center center;}
+nav a.acerca{	background: transparent url(../imagenes/icon/acerca.png) no-repeat center center;}
+nav a.volver{	background: transparent url(../imagenes/icon/volver.png) no-repeat center center;}
+nav a.login{ 	background: transparent url(../imagenes/icon/login.png) no-repeat center center;}
+
+
+ nav a.inicio
+,nav a.ayuda
+,nav a.imprimir
+,nav a.volver
+,nav a.maximize
+,nav a.ubicacion
+,nav a.login
+,nav a.acerca{
+	width:20px;
+	height:20px;
+}
+
+ nav a.inicio:hover
+,nav a.ayuda:hover
+,nav a.imprimir:hover
+,nav a.volver:hover
+,nav a.maximize:hover
+,nav a.ubicacion:hover
+,nav a.login:hover
+,nav a.acerca:hover{
+	background-color: #69C325;
+}
+
+nav a.inicio:active
+,nav a.ayuda:active
+,nav a.imprimir:active
+,nav a.volver:active
+,nav a.maximize:active
+,nav a.ubicacion:active
+,nav a.login:active
+,nav a.acerca:active{
+	background-color: red;
+}
+
+#ayuda2{ width:50px; height:50px; }
+
+p.label_search{
+	float:left;
+	font-family: Arial, sans-serif, "Verdana";
+	font-size: 15px;
+	margin:3px 6px 0px 0px;
+	font-weight: 600;
+}
+
+nav ul li.search{
+    float:left;
+}
+nav input[type="text"]{
+    /*float:left;
+    border:2px solid #ccc;    
+    padding:2px 2px 2px 2px;*/
+    font-family: Arial, sans-serif, "Verdana";
+    font-style: normal;
+    font-size: 15px;
+   	border:1px #71C734 inset; 
+	-moz-border-radius: 0px; /* FF1+ */
+    -webkit-border-radius: 0px; /* Saf3+, Chrome */
+	border-radius: 0px; /* Opera 10.5, IE 9 */
+	-moz-box-shadow: 0px 0px 20px  #71C734;
+	box-shadow: 0px 0px 20px #71C734;
+	height: 21px;
+}
+
+input.searchbutton{    
+    width:24px;
+	height:24px;
+	cursor: url(../imagenes/favicon/hand.cur), pointer;
+    background: transparent url(../imagenes/icon/search.png) no-repeat center center;
+   	border:0px #71C734 inset; 
+	-moz-box-shadow: 0px 0px 20px  #71C734;
+	box-shadow: 0px 0px 20px #71C734;
+}
+input.searchbutton:hover{
+    background-color:#69C325;
+}
+
+input.searchbutton:active{
+	background-color: red;
+}
+
+.ui-autocomplete {
+	font-family: Arial, sans-serif, "Verdana";
+	font-size: 13px;
+    background-color: white;
+    width: 350px;
+    border: 0px solid #cfcfcf;
+    list-style-type: none;
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    cursor: url(../imagenes/favicon/hand.cur), pointer;
+}

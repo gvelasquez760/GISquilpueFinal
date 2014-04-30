@@ -1,0 +1,94 @@
+@CHARSET "UTF-8";
+.clear{
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	display: block;
+}
+
+/******* GENERAL RESET *******/
+
+/******* MENU *******/
+#container{
+	margin: 1em auto;
+	width: 350px;
+	height: 200px;
+	margin: 0px;
+	padding: 0px;
+	cursor: url(../imagenes/favicon/mario.cur), pointer;
+}
+#container ul{
+	list-style: none;
+	list-style-position: outside;
+	margin:0px;
+	padding:0px;
+}
+#container ul.menu_iw li{
+	float: left;
+	margin-right: 5px;
+	margin-bottom: -1px;
+	font-weight: 700;
+	font-family: Arial, sans-serif, "Verdana";
+	font-size: 12px;
+	display: block;
+	padding: 5px 10px 5px 10px;
+	background: #efefef;
+	border: 1px solid #d0ccc9;
+	border-width: 1px 1px 1px 1px;
+	position: relative;
+	color: #898989;
+	cursor: url(../imagenes/favicon/hand.cur), pointer;
+}
+#container ul.menu_iw li.active{
+	background: #fff;
+	top: 1px;
+	border-bottom: 0;
+	color: #69C325;
+}
+/******* /MENU *******/
+/******* CONTENT *******/
+.content{
+	margin: 0px auto;
+	background: #efefef;
+	background: #fff;
+	border: 1px solid #d0ccc9;
+	text-align: left;
+	padding: 10px;
+	padding-bottom: 10px;
+	font-size: 11px;
+}
+.content h2{
+	line-height: 1em;
+	vertical-align: middle;
+	height: 20px;
+	text-align: center;
+	padding: 10px 10px 10px 10px;  /* padding: 10px 10px 10px 52px; */
+	font-size: 18px;
+	font-family: Arial, sans-serif, "Verdana";
+	margin:0px;
+}
+
+.content p {
+	font-size: 14px;
+	font-family: Arial, sans-serif, "Verdana";
+	padding: 0px;
+	margin: 0px;
+}
+
+/******* /CONTENT *******/
+/******* categoria *******/
+.content.categoria h2{
+	background: transparent url(images/news.jpg) no-repeat scroll left top;
+}
+.content.categoria{
+	display: block;
+}
+/******* /categoria *******/
+/******* mas *******/
+.content.mas h2{
+	background: transparent url(images/tuts.jpg) no-repeat scroll left top;
+}
+.content.mas{
+	display: none;
+}
+/******* /mas *******/
